@@ -9,10 +9,19 @@ import React from 'react';
 
 import styles from './styles.css';
 
-function Navigator({ topics }) {
+function Navigator({ topics, selectTopic }) {
+  const topicNodes = topics.map(t => (
+    <div
+      key={t.name}
+      onClick={() => selectTopic(t)}
+    >
+      {t.name}
+      </div>
+  ));
+
   return (
     <div className={styles.navigator}>
-      We have {topics.length} topics in the app
+      {topicNodes}
     </div>
   );
 }
@@ -24,6 +33,7 @@ Navigator.propTypes = {
       description: React.PropTypes.string.isRequired,
     })
   ).isRequired,
+  selectTopic: React.PropTypes.func.isRequired,
 };
 
 export default Navigator;
